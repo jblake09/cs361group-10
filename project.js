@@ -7,34 +7,45 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 var mysql = require('./dbcon.js');
-// var http = require('http');
-var express = require("express");
+const express = require("express");
+const app = express();
+const path = require('path');
 
-var app = express();
 app.use(express.static('public'));
 
-app.use('/css', express.static(__dirname + 'public/css'));
+app.use('/css', express.static('public/css'));
 
-var server = app.listen(3000, function(){
-	var port = server.address().port;
-	console.log("Server started at http://localhost:%s", port)
+app.set("port", 3000);
+
+function getData(res, mysql, context, complete) {
+	var sql = "SELECT * FROM USER;"
+	mysql.pool.query(sql, function(err, rows, fields){
+	if(err){
+		res.write(JSON.stringify(err));
+		res.end();
+	}
+	console.log(rows);
+	complete();
+});
+}
+
+app.get(['/', '/index'], function(req, res, next){
+	res.sendFile(path.join(__dirname+'/public/login.html'));
 });
 
-// http.createServer(function(req,res){
-//   res.writeHead(200, { 'Content-Type': 'text/plain' });
-//   res.end('Hello world!');
-// }).listen(3000);
+app.get(['/database'], function(req, res, next){
+	var callbackCount = 0;
+	var context = {};
+	console.log("testing");
+	getData(res, mysql, context, complete);
+	function complete(){
+		callbackCount++;
+		if(callbackCount >= 1){
+			console.log(context);
+		}
+	}
+});
 
-//console.log('Server started on localhost:3000; press Ctrl-C to terminate....');
-
-// app.get(['/', '/index'], function(req, res, next){
-// 	var callbackCount = 0;
-// 	var context = {};
-// 	context.title = "Login";
-// 	function complete(){
-// 		callbackCount++;
-// 		if(callbackCount >= 0){
-// 		res.render('Login.html', context);
-// 	};
-// 	}
-// });
+app.listen(app.get('port'), function(){
+	console.log("Express started on: " + app.get('port') + "; press Ctl-C to term");
+});
