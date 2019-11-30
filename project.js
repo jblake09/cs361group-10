@@ -10,8 +10,11 @@ var mysql = require('./dbcon.js');
 const express = require("express");
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 
 app.use('/css', express.static('public/css'));
 
@@ -51,7 +54,17 @@ app.get(['/create'], function(req, res, next){
 });
 
 app.post(['/create'], function(req, res, next){
-	var sql = "INSERT INTO USER ("
+	var sql = "INSERT INTO USERS (`email`, `password`, `name`, `address`, `familySize`, `maxDist`, `transportOpt`) VALUE (?, ?, ?, ?, ?, ?,?)"
+	var inserts = [req.body.inputEmail, req.body.inputPassword, req.body.inputName, req.body.inputAddress, req.body.inputFamily,
+					req.body.inputDistance, req.body.transportOpt];
+	mysql.pool.query(sql, inserts, function(err, result){
+	if(err){
+		next(err);
+		return;
+	}
+	res.redirect('/');
+	return;
+	});
 })
 
 app.listen(app.get('port'), function(){
