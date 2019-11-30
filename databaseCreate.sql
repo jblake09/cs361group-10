@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS `USERS`;
 CREATE TABLE `USERS` (
 	`id` int(11) NOT NULL AUTO_INCREMENT UNIQUE,
 	`email` varchar(255) NOT NULL UNIQUE,
+	`password` varchar(255) NOT NULL,
 	`name` varchar(255) NOT NULL,
 	`address` varchar(255) NOT NULL,
 	`familySize` int NOT NULL,
@@ -14,8 +15,8 @@ CREATE TABLE `USERS` (
 -- Create sample data for user group
 
 INSERT INTO `USERS` VALUES
-	(1000, '123@gmail.com', 'Jon Smith', '123 Main Street', '4', '100', 'C'),
-	(1001, '124@gmail.com', 'Jon Adams', '123 South Street', '6', '25', 'B');
+	(1000, '123@gmail.com', 'password123', 'Jon Smith', '123 Main Street', '4', '100', 'C'),
+	(1001, '124@gmail.com', 'password456', 'Jon Adams', '123 South Street', '6', '25', 'B');
 
 
 DROP TABLE IF EXISTS `LISTS`;
