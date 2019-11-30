@@ -18,7 +18,7 @@ app.use('/css', express.static('public/css'));
 app.set("port", 3000);
 
 function getData(res, mysql, context, complete) {
-	var sql = "SELECT * FROM USER;"
+	var sql = "SELECT * FROM USERS;"
 	mysql.pool.query(sql, function(err, rows, fields){
 	if(err){
 		res.write(JSON.stringify(err));
@@ -45,6 +45,14 @@ app.get(['/database'], function(req, res, next){
 		}
 	}
 });
+
+app.get(['/create'], function(req, res, next){
+	res.sendFile(path.join(__dirname+'/public/create.html'));
+});
+
+app.post(['/create'], function(req, res, next){
+	var sql = "INSERT INTO USER ("
+})
 
 app.listen(app.get('port'), function(){
 	console.log("Express started on: " + app.get('port') + "; press Ctl-C to term");
