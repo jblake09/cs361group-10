@@ -54,7 +54,17 @@ passport.use(new LocalStrategy(
     function(username, password, done) {
        console.log(username);
 	   console.log(password);
-	   return done (null, 'fsds');
+	   mysql.pool.query("SELECT password FROM USERS WHERE  email = ?", [username], 
+			function(err, results, fields){ 
+				if (err){done(err)};
+				
+				if (results.length == 0){
+					done(null, false);
+					}
+				
+				return done (null, 'hfhd');
+			})
+	   return done (null, false);
     }
 ));
 
@@ -84,7 +94,7 @@ app.get(['/login'], function(req, res, next){
 app.post(['/login'], passport.authenticate(
 	'local', {
 	successRedirect: '/Profile.html',
-	failureRedirect: '/Login'
+	failureRedirect: '/login'
 	}));
 	
 app.get(['/create'], function(req, res, next){
