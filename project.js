@@ -95,7 +95,7 @@ app.get(['/login'], function(req, res, next){
 app.post(['/login'], passport.authenticate(
 	'local', {
 	successRedirect: '/Profile.html',
-	failureRedirect: '/loginerr.html'
+	failureRedirect: '/login'
 	}));
 	
 app.get(['/create'], function(req, res, next){
