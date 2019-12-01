@@ -26,15 +26,12 @@ clear:both;
 
 
 .login-form {
-<<<<<<< HEAD
   max-width: 380px;
   padding: 15px 35px 45px;
   margin: 0 auto;
   background-color: #eee;
   border: 1px solid rgba(0,0,0,0.1);
-}
 
-=======
 	text-align: center;
 	background-color: #131315;
 	width: 40%;
@@ -122,5 +119,4 @@ button[type="submit"]:hover{
 	-ms-transition: 0.5s all;
 	transition: 0.5s all;
 }
->>>>>>> Design
 
