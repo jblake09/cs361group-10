@@ -94,10 +94,18 @@ app.get(['/login'], function(req, res, next){
 
 app.post(['/login'], passport.authenticate(
 	'local', {
-	successRedirect: '/Profile.html',
-	failureRedirect: '/login'
+	successRedirect: '/profile',
+	failureRedirect: '/loginerr'
 	}));
-	
+
+app.get(['/profile'], function(req, res, next){
+	res.sendFile(path.join(__dirname+'/public/Profile.html'));
+});
+
+app.get(['/loginerr'], function(req, res, next){
+	res.sendFile(path.join(__dirname+'/public/loginerr.html'));
+});
+
 app.get(['/create'], function(req, res, next){
 	res.sendFile(path.join(__dirname+'/public/create.html'));
 });
