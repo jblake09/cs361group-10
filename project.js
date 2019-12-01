@@ -58,6 +58,8 @@ passport.use(new LocalStrategy(
 	   mysql.pool.query("SELECT password FROM USERS WHERE email= ?", [username], function(err, results, fields)
 	   {if (err){done(err)};
 	   if (results.length==0){return done(null, false)};
+	   console.log(results[0].password.toString());
+	   if(results[0].password.toString()==password)
 	   return done(null, "false");
 	  
 	   
