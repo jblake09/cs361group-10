@@ -50,21 +50,19 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
+
 passport.use(new LocalStrategy(
     function(username, password, done) {
        console.log(username);
 	   console.log(password);
-	   mysql.pool.query("SELECT password FROM USERS WHERE  email = ?", [username], 
-			function(err, results, fields){ 
+	   mysql.pool.query("SELECT password FROM USERS WHERE username= 'mexico'",
+	   function(err, results, fields){ 
 				if (err){done(err)};
 				
-				if (results.length == 0){
-					done(null, false);
-					}
 				
-				return done (null, 'hfhd');
+				return(null, false);
 			})
-	   return done (null, false);
+	  // return(null, false);
     }
 ));
 
@@ -93,7 +91,7 @@ app.get(['/login'], function(req, res, next){
 
 app.post(['/login'], passport.authenticate(
 	'local', {
-	successRedirect: '/Profile.html',
+	successRedirect: '/login',
 	failureRedirect: '/login'
 	}));
 	
