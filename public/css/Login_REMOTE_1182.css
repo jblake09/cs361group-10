@@ -1,0 +1,116 @@
+@import "bourbon";
+
+body{
+	background:url(../images/banner.jpg),no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+
+img {
+    width: 100%;
+}
+
+@font-face {
+  font-family:'Lobster-Regular';
+  src: url('../fonts/Lobster-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family:'Righteous-Regular';
+  src: url('../fonts/Righteous-Regular.ttf') format('truetype');
+}
+
+.clear {
+clear:both;
+}
+
+
+.login-form {
+	text-align: center;
+	background-color: #131315;
+	width: 40%;
+	margin: auto;
+  	padding: 3em;
+	box-shadow: 4px 4px 0px rgb(77, 78, 80);
+	opacity: 0.7;
+	box-sizing: border-box;
+}
+
+h2{
+	margin:auto;	
+font-weight:400;
+    transition:0.5s all;
+-webkit-transition:0.5s all;
+-moz-transition:0.5s all;
+-o-transition:0.5s all;
+-ms-transition:0.5s all;
+	font-size: 20px;
+	font-weight: 400;
+	text-align: center;
+	text-transform: lowercase;
+	letter-spacing: 0.1em;
+	padding: 0.5em;
+	color: #fff;
+	border-bottom: 2px solid red;
+	font-family: 'Righteous', cursive;
+
+}
+
+input[type="text"],input[type="password"]{
+	font-size: 1em;
+	font-weight:500;
+	text-align: center;
+	text-transform: capitalize;
+	letter-spacing: 1px;
+	margin: auto
+  max-width: 300px;
+	padding: 8px 0;
+	border: 2px solid #fff;
+	outline: none;
+	box-sizing: border-box;
+	font-family: 'Righteous', cursive;
+}
+
+button[type="submit"] {
+ display: block;
+  max-width: 300px;
+  margin: auto;
+	font-size: 1em;
+	font-weight: 500;
+	text-align: center;
+	text-transform: capitalize;
+	letter-spacing: 3px;
+
+    padding: 8px 0;
+    border: 2px solid #fff;
+	outline: none;
+	cursor: pointer;
+	width: 30%;
+	box-sizing: border-box;
+	font-family: 'Righteous', cursive;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	transition: 0.5s all;
+}
+button[type="submit"]:hover{
+	font-size: 1em;
+	font-weight: 500;
+	text-transform: none;
+	text-align: center;
+	border-radius: 2em;
+	border:2px solid #fff;
+	padding: 8px 0;
+	outline: none;
+	cursor: pointer;
+	background-color: transparent;
+	color: #fff;
+	font-family: 'Righteous', cursive;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	transition: 0.5s all;
+}
+
