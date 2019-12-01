@@ -55,16 +55,15 @@ passport.use(new LocalStrategy(
     function(username, password, done) {
        console.log(username);
 	   console.log(password);
-	   mysql.pool.query("SELECT password FROM USERS WHERE username= 'mexico'",
-	   function(err, results, fields){ 
-				if (err){done(err)};
-				
-				
-				return(null, false);
-			})
-	  // return(null, false);
-    }
-));
+	   mysql.pool.query("SELECT password FROM USERS WHERE email= ?", [username], function(err, results, fields)
+	   {if (err){done(err)};
+	   if (results.length==0){return done(null, false)};
+	   return done(null, "false");
+	  
+	   
+    })
+	
+	}));
 
 app.get(['/', '/index'], function(req, res, next){
 	res.sendFile(path.join(__dirname+'/public/login.html'));
@@ -91,7 +90,7 @@ app.get(['/login'], function(req, res, next){
 
 app.post(['/login'], passport.authenticate(
 	'local', {
-	successRedirect: '/login',
+	successRedirect: '/Profile.html',
 	failureRedirect: '/login'
 	}));
 	
