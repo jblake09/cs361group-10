@@ -6,32 +6,9 @@ body{
 	background-attachment: fixed;
 }
 
-body{
-	transition:0.5s all;
-	-webkit-transition:0.5s all;
-	-moz-transition:0.5s all;
-	-o-transition:0.5s all;
-	-ms-transition:0.5s all;
-	font-weight:400;
-}
 
-input[type="button"],input[type="submit"]{
-	transition:0.5s all;
-	-webkit-transition:0.5s all;
-	-moz-transition:0.5s all;
-	-o-transition:0.5s all;
-	-ms-transition:0.5s all;
-}
-
-.login-form{
-	text-align: center;
-	background-color: #131315;
-	width: 35%;
-	margin: 0 auto;
-	padding: 30px;
-	box-shadow: 4px 4px 0px rgb(77, 78, 80);
-	opacity: 0.7;
-	box-sizing: border-box;
+img {
+    width: 100%;
 }
 
 @font-face {
@@ -43,25 +20,30 @@ input[type="button"],input[type="submit"]{
   src: url('../fonts/Righteous-Regular.ttf') format('truetype');
 }
 
-.form-control {
+.clear {
+clear:both;
+}
+
+
+.login-form {
 	text-align: center;
 	background-color: #131315;
 	width: 40%;
-	margin: 0 auto;
-	padding: 3em;
+	margin: auto;
+  	padding: 3em;
 	box-shadow: 4px 4px 0px rgb(77, 78, 80);
 	opacity: 0.7;
 	box-sizing: border-box;
 }
 
 h2{
-	margin:0;
-	font-weight:400;
-	transition:0.5s all;
-	-webkit-transition:0.5s all;
-	-moz-transition:0.5s all;
-	-o-transition:0.5s all;
-	-ms-transition:0.5s all;
+	margin:auto;	
+font-weight:400;
+    transition:0.5s all;
+-webkit-transition:0.5s all;
+-moz-transition:0.5s all;
+-o-transition:0.5s all;
+-ms-transition:0.5s all;
 	font-size: 20px;
 	font-weight: 400;
 	text-align: center;
@@ -71,6 +53,7 @@ h2{
 	color: #fff;
 	border-bottom: 2px solid red;
 	font-family: 'Righteous', cursive;
+
 }
 
 input[type="text"],input[type="password"]{
@@ -79,7 +62,8 @@ input[type="text"],input[type="password"]{
 	text-align: center;
 	text-transform: capitalize;
 	letter-spacing: 1px;
-	margin: 10px;
+	margin: auto
+  max-width: 300px;
 	padding: 8px 0;
 	border: 2px solid #fff;
 	outline: none;
@@ -88,14 +72,17 @@ input[type="text"],input[type="password"]{
 }
 
 button[type="submit"] {
+ display: block;
+  max-width: 300px;
+  margin: auto;
 	font-size: 1em;
 	font-weight: 500;
 	text-align: center;
 	text-transform: capitalize;
 	letter-spacing: 3px;
-	margin: 20px 0 20px;
-	padding: 8px 0;
-	border: 2px solid #fff;
+
+    padding: 8px 0;
+    border: 2px solid #fff;
 	outline: none;
 	cursor: pointer;
 	width: 30%;
@@ -107,7 +94,6 @@ button[type="submit"] {
 	-ms-transition: 0.5s all;
 	transition: 0.5s all;
 }
-
 button[type="submit"]:hover{
 	font-size: 1em;
 	font-weight: 500;
@@ -127,5 +113,4 @@ button[type="submit"]:hover{
 	-ms-transition: 0.5s all;
 	transition: 0.5s all;
 }
-
 
