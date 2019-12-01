@@ -89,9 +89,26 @@ input[type="submit"]:hover{
     transition: 0.5s all;
 }
 
+.navbar {
+    text-align: center;
+    background-color: #000000;
+    height: 75px;
+    padding-top: 20px ;
+}
 
 
+.field {
+    display: inline-block;
+    margin-right: 100px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
 
+#aLink {
+    color: #EDBB99;
+    text-decoration: none;
+}
 
 
 
