@@ -16,6 +16,8 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 
+
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
@@ -93,7 +95,7 @@ app.get(['/login'], function(req, res, next){
 app.post(['/login'], passport.authenticate(
 	'local', {
 	successRedirect: '/Profile.html',
-	failureRedirect: '/login'
+	failureRedirect: '/loginerr.html'
 	}));
 	
 app.get(['/create'], function(req, res, next){
@@ -113,6 +115,7 @@ app.post(['/create'], function(req, res, next){
 	return;
 	});
 })
+
 
 app.listen(app.get('port'), function(){
 	console.log("Express started on: " + app.get('port') + "; press Ctl-C to term");
