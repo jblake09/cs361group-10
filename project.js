@@ -7,6 +7,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 var mysql = require('./dbcon.js');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var MySQLStore = require('express-mysql-session')(session);
 const express = require("express");
 const app = express();
 const path = require('path');
@@ -15,6 +19,14 @@ const bodyParser = require('body-parser');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use('/css', express.static('public/css'));
 
@@ -31,6 +43,20 @@ function getData(res, mysql, context, complete) {
 	complete();
 });
 }
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+       console.log(username);
+	   console.log(password);
+	   return done (null, 'fsds');
+    }
+));
 
 app.get(['/', '/index'], function(req, res, next){
 	res.sendFile(path.join(__dirname+'/public/login.html'));
@@ -49,6 +75,18 @@ app.get(['/database'], function(req, res, next){
 	}
 });
 
+
+
+app.get(['/login'], function(req, res, next){
+	res.sendFile(path.join(__dirname+'/public/Login.html'));
+});
+
+app.post(['/login'], passport.authenticate(
+	'local', {
+	successRedirect: '/Profile.html',
+	failureRedirect: '/Login'
+	}));
+	
 app.get(['/create'], function(req, res, next){
 	res.sendFile(path.join(__dirname+'/public/create.html'));
 });
