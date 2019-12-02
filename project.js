@@ -102,6 +102,10 @@ app.get(['/profile'], function(req, res, next){
 	res.sendFile(path.join(__dirname+'/public/Profile.html'));
 });
 
+app.get(['/list'], function(req, res, next){
+	res.sendFile(path.join(__dirname+'/public/List.html'));
+});
+
 app.get(['/loginerr'], function(req, res, next){
 	res.sendFile(path.join(__dirname+'/public/loginerr.html'));
 });

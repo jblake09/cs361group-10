@@ -35,6 +35,18 @@ h1 {
     font-family: 'Lobster', cursive;
 }
 
+h2 {
+    font-size: 45px;
+    font-weight: 400;
+    text-align: center;
+    text-transform: capitalize;
+    letter-spacing: 9px;
+    word-spacing: 4px;
+    margin: 40px 0;
+    color: #fff;
+    font-family: 'Lobster', cursive;
+}
+
 .form-group{
     font-size: 12px;
     font-weight: 500;
