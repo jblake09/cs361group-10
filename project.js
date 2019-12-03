@@ -28,12 +28,42 @@ app.set('view engine', '.hbs')
 app.set('views', path.join(__dirname, 'views'))
 
 
-app.get('/list', (request, response) => {
-  response.render('List', {
-  })
-  console.log("huh");
-  
-})
+function getUsersForDropDown(req, res, mysql, context, complete) {
+		var sql = 'SELECT GROCERY.name, GROCERY.ID FROM GROCERY';
+		mysql.pool.query(sql, function(error, results, fields) {
+			if (error) {
+				res.write(JSON.stringify(error));
+				console.log("err");
+				res.end();
+			}
+			
+			context= results;
+			complete();
+						
+		});
+	}
+
+
+app.get('/list', (req, res) => {
+      var callbackCount = 0;
+      var context = {};
+	  var sql = 'SELECT GROCERY.name, GROCERY.ID FROM GROCERY';
+	  mysql.pool.query(sql, function(error, results, fields) {
+			if (error) {
+				res.write(JSON.stringify(error));
+				console.log("err");
+				res.end();
+			}
+			
+			context= results;
+			console.log(context);
+			//complete();
+			res.render('List', context);		
+		});
+
+
+       
+    });
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -122,7 +152,8 @@ app.get(['/profile'], function(req, res, next){
 
 app.get(['/list'], function(req, res, next)
 {
-res.render('List.handlebars');
+	
+	res.render('List.handlebars');
 });
 
 app.get(['/loginerr'], function(req, res, next){
@@ -147,19 +178,7 @@ app.post(['/create'], function(req, res, next){
 	});
 })
 
-function getUsersForDropDown(req, res, mysql, context, complete) {
-		var sql = 'SELECT GROCERY.name, GROCERY.ID FROM GROCERY';
-		mysql.pool.query(sql, function(error, results, fields) {
-			if (error) {
-				res.write(JSON.stringify(error));
-				console.log("err");
-				res.end();
-			}
-			console.log("hi");
-			context.users_dropdown = results;
-			complete();
-		});
-	}
+
 
 app.listen(app.get('port'), function(){
 	console.log("Express started on: " + app.get('port') + "; press Ctl-C to term");
