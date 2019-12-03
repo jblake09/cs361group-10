@@ -57,13 +57,17 @@
 </nav>
 
 
-
-<div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Search for produce" name="search">
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+<h3>SEARCH FOR PRODUCE</h3>
+<form id="update-playlist" action="/playlists/{{playlist.playlist_id}}" method="post">
+  
+    PRODUCE: <select name="name"> 
+      {{#each list_dropdown}}
+      <option value=>{{name}}</option>
+                   {{/each}}
+    </select><br>
+</form>
+<button onclick="updatePlaylist({{playlist.playlist_id}})">Update</button>
+<script defer>selectPlaylist({{playlist.uid}});</script>
 
 </main>
 <script type="text/javascript">

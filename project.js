@@ -15,8 +15,25 @@ const express = require("express");
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars')
 
 
+app.engine('.hbs', exphbs({
+  defaultLayout: 'main',
+  extname: '.hbs',
+  layoutsDir: path.join(__dirname, 'views/layouts')
+}))
+
+app.set('view engine', '.hbs')
+app.set('views', path.join(__dirname, 'views'))
+
+
+app.get('/list', (request, response) => {
+  response.render('List', {
+  })
+  console.log("huh");
+  
+})
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -102,8 +119,10 @@ app.get(['/profile'], function(req, res, next){
 	res.sendFile(path.join(__dirname+'/public/Profile.html'));
 });
 
-app.get(['/list'], function(req, res, next){
-	res.sendFile(path.join(__dirname+'/public/List.html'));
+
+app.get(['/list'], function(req, res, next)
+{
+res.render('List.handlebars');
 });
 
 app.get(['/loginerr'], function(req, res, next){
@@ -128,6 +147,19 @@ app.post(['/create'], function(req, res, next){
 	});
 })
 
+function getUsersForDropDown(req, res, mysql, context, complete) {
+		var sql = 'SELECT GROCERY.name, GROCERY.ID FROM GROCERY';
+		mysql.pool.query(sql, function(error, results, fields) {
+			if (error) {
+				res.write(JSON.stringify(error));
+				console.log("err");
+				res.end();
+			}
+			console.log("hi");
+			context.users_dropdown = results;
+			complete();
+		});
+	}
 
 app.listen(app.get('port'), function(){
 	console.log("Express started on: " + app.get('port') + "; press Ctl-C to term");
