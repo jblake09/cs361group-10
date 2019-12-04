@@ -1,10 +1,59 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Grocery Buddy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="css/create.css" media="screen"/>
+<!-- This is old version of Bootstrap -->
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  -->
+<!-- Version 4.4.1 of bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 <script src="/path/to/handlebars.min.js"></script>
 
+ </head>
+ <body style="visibility: hidden;" onload="js_Load()">
+ <div class="jumbotron text-center">
+	<h1><img src="/images/logo.png" style=width:200px;height:200px;></h1>
+</div>
 
-SEARCH FOR PRODUCE: <select name="playlist" id="playlist-selector"> 
+<main>
+<table>
+<h2>LIST</h2>
+
+<nav class = "navbar">
+    <ul>
+        <li class = "field"><a href = "Login.html" id = "aLink">Home</a></li>
+        <li class = "field"><a href = "Login.html" id = "aLink">Profile</a></li>
+        <li class = "field"><a href = "Login.html" id = "aLink">Recipe</a></li>
+        <li class = "field"><a href = "Login.html" id = "aLink">Favorites</a></li>
+        <li class = "field"><a href = "Login.html" id = "aLink">History</a></li>
+        <li class = "field"><a href = "Login.html" id = "aLink">Logout </a></li>
+    </ul>
+</nav>
+<br><br>
+<div class="p-3 mb-2 bg-primary text-white"style=width:250px;height:50px> Produce Found Near You!</div>
+<br>
+<select name="playlist" id="playlist-selector" class="wia-filter-value selectpicker show-tick" data-dropup-auto="false">
       {{#each grocery_dropdown}}
       <option value="{{id}}">{{name}}</option>
                    {{/each}}
     </select><br>
+</main>
+<script type="text/javascript">
+   document.body.style.visibility='visible';
 </script>
+
+</html>
