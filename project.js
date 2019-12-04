@@ -16,6 +16,16 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars')
+app.set('views',__dirname + '/views'); //Set views directory
+app.use(express.static(__dirname + '/JS'));
+app.set('views engine', 'ejs'); //Set view engine to ejs
+app.engine('html', require('ejs').renderFile);
+app.use(function(req, res, next){ //Set no cache for the server
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
+})
 
 
 app.engine('.hbs', exphbs({
@@ -28,42 +38,90 @@ app.set('view engine', '.hbs')
 app.set('views', path.join(__dirname, 'views'))
 
 
-function getUsersForDropDown(req, res, mysql, context, complete) {
-		var sql = 'SELECT GROCERY.name, GROCERY.ID FROM GROCERY';
+app.set('view engine', 'List')
+
+
+function getProduceForDropDown(req, res, mysql, context, complete) {
+		mysql = require('./dbcon.js');
+		var sql = 'SELECT GROCERY.name, GROCERY.id FROM GROCERY';
 		mysql.pool.query(sql, function(error, results, fields) {
 			if (error) {
 				res.write(JSON.stringify(error));
-				console.log("err");
 				res.end();
 			}
-			
-			context= results;
+			context.grocery_dropdown = results;
 			complete();
-						
 		});
 	}
-
-
-app.get('/list', (req, res) => {
-      var callbackCount = 0;
-      var context = {};
-	  var sql = 'SELECT GROCERY.name, GROCERY.ID FROM GROCERY';
-	  mysql.pool.query(sql, function(error, results, fields) {
+/*
+function getUsersForDropDown(req, res, context, complete) {
+		var sql = 'SELECT name, id FROM GROCERY';
+		mysql.pool.query(sql, function(error, results, fields) {
 			if (error) {
 				res.write(JSON.stringify(error));
-				console.log("err");
 				res.end();
 			}
-			
-			context= results;
-			console.log(context);
-			//complete();
-			res.render('List', context);		
+			context.grocery_dropdown = results;
+			complete();
 		});
+	}&/
+	/*
+	app.get('/', function(req, res) {
+		var callbackCount = 0;
+		var context = {};
+	//	context.jsscripts = ["deletePlaylist.js"];
+		var mysql = req.app.get('mysql');
+	//	getPlaylists(req, res, mysql, context, complete);
+		getUsersForDropDown(req, res, mysql, context, complete);
+	//	function complete() {
+		//	callbackCount++;
+			//if (callbackCount >= 2) {
+				res.render('List', context);
+		//	}
+		//}
+	});
+*/
+app.get('/list', function (req, res) 
+{
+	//var name="tomato";
+	//mysql.pool.query('SELECT name, price, grocerystore FROM GROCERY', function(err, results, fields)
+	//var sql = , [name], 
+	//mysql.pool.query('SELECT name, price, grocerystore FROM GROCERY', function(error, results, fields) 
+//	{
+	//		if (error) {router.get('/', function(req, res) {
+		var callbackCount = 0;
+		var context = {};
+		//context.jsscripts = ["deletePlaylist.js"];
+		var mysql = req.app.get('mysql');
+//		getPlaylists(req, res, mysql, context, complete);
+		getProduceForDropDown(req, res, mysql, context, complete);
+		function complete() 
+		{
+			//callbackCount++;
+		//	if (callbackCount >= 2)
+			//{
+				res.render('List.hbs', context);
+		//	}
+		}
+});
+//			res.write(JSON.stringify(error));
+			//console.log("err");
+	//		res.end();
+		//	}
+			//var data = [];
+//		for(i=0;i<results.length;i++){
+	//	data.push(results[i]);
+		//}
+		//res.end(JSON.stringify(results));
+			//var context = {};
+			//context=results.name.toString();
+			//console.log(data);
+//	res.render('List.hbs', data);
+  
+ 
+	//})
+//	});
 
-
-       
-    });
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false}));
