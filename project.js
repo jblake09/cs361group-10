@@ -53,6 +53,44 @@ function getProduceForDropDown(req, res, mysql, context, complete) {
 			complete();
 		});
 	}
+
+function getProduceForList(req, res, mysql, context, complete) {
+		mysql = require('./dbcon.js');
+		var sql = 'SELECT LISTS.itemID, GROCERY.ID, GROCERY.name, GROCERY.grocerystore FROM LISTS LEFT JOIN GROCERY ON LISTS.itemID = GROCERY.ID';
+		mysql.pool.query(sql, function(error, results, fields) {
+			if (error) {
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			context.lists = results;
+			complete();
+		});
+	}
+
+
+app.get('/viewList', function (req, res) 
+{
+	//var name="tomato";
+	//mysql.pool.query('SELECT name, price, grocerystore FROM GROCERY', function(err, results, fields)
+	//var sql = , [name], 
+	//mysql.pool.query('SELECT name, price, grocerystore FROM GROCERY', function(error, results, fields) 
+//	{
+	//		if (error) {router.get('/', function(req, res) {
+		var callbackCount = 0;
+		var context = {};
+		//context.jsscripts = ["deletePlaylist.js"];
+		var mysql = req.app.get('mysql');
+//		getPlaylists(req, res, mysql, context, complete);
+		getProduceForList(req, res, mysql, context, complete);
+		function complete() 
+		{
+			callbackCount++;
+			if (callbackCount >= 1)
+			{
+				res.render('viewList.hbs', context);
+			}
+		}
+});
 /*
 function getUsersForDropDown(req, res, context, complete) {
 		var sql = 'SELECT name, id FROM GROCERY';
@@ -81,6 +119,24 @@ function getUsersForDropDown(req, res, context, complete) {
 		//}
 	});
 */
+
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use('/css', express.static('public/css'));
+
+app.set("port", 3000);
+
 app.get('/list', function (req, res) 
 {
 	//var name="tomato";
@@ -112,33 +168,17 @@ app.post(['/list'], function(req, res, next){
 	console.log(req.body);
 
 
-	// var sql = "INSERT INTO LISTS (`userID`, `itemID`, `qty`) VALUE (?, ?, ?)"
-	// var inserts = [req.body.selection];
-	// mysql.pool.query(sql, inserts, function(err, result){
-	// if(err){
-	// 	next(err);
-	// 	return;
-	// }
-	// res.redirect('/');
-	// return;
-	// });
+	var sql = "INSERT INTO LISTS (`userID`, `itemID`, `qty`) VALUE (?, ?, ?)"
+	var inserts = [1000, req.body.groceryOption, 1];
+	mysql.pool.query(sql, inserts, function(err, result){
+	if(err){
+		next(err);
+		return;
+	}
+	res.redirect('/list');
+	return;
+	});
 })
-
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false}));
-app.use(bodyParser.json());
-app.use(require('express-session')({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.use('/css', express.static('public/css'));
-
-app.set("port", 3000);
 
 function getData(res, mysql, context, complete) {
 	var sql = "SELECT * FROM USERS;"

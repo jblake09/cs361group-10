@@ -43,26 +43,27 @@
 <br><br>
 <div class="p-3 mb-2 bg-primary text-white"style=width:250px;height:50px> Produce Found Near You!</div>
 <br>
-{{!-- <form action='/list' method='POST'>
-  <select name="groceryOption" class="wia-filter-value selectpicker show-tick" data-dropup-auto="false">
-      {{#each grocery_dropdown}}
-      <option value="{{this.id}}">{{this.name}}</option>
-      {{/each}}
-    </select><br>
-  <input type="submit" class="btn btn-primary" value="Submit">
-</form> --}}
+  <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Grocery Store</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each lists}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.grocerystore}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
 
 
- <form action='/list' method="POST">
-      <select name="groceryOption" id="groceryOption">
-        <option value="1" >Granny Smith Apple</option>
-        <option value="2" >Avocado</option>
-        <option value="3" >Peach</option>
-        <option value="29">Fig</option>
-      </select>
-<br>
-    <input type="submit" class="btn btn-primary" value="Submit">
- </form>
+  </table>
+
+</form>
+
 
 </main>
 <script type="text/javascript">
