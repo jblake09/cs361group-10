@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Grocery Buddy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="css/create.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="css/profile.css" media="screen"/>
 <!-- This is old version of Bootstrap -->
 <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -14,34 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-
  </head>
- <body style="visibility: hidden;" onload="js_Load()">
- <div class="jumbotron text-center">
-	<h1><img src="/images/logo.png" style=width:200px;height:200px;></h1>
-</div>
-<!-- Possible Menu we can use later
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-    
-	
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">JB</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-			<li class="active"><a href="#">HOME<span class="sr-only">(current)</span></a></li>
-			<li><a href="about.html">ABOUT ME</a></li>
-			<li><a href="profile.html">PROFILE</a></li>
-			<li><a href="contact.html">CONTACT ME</a></li>
-		</div>
-	</div>
-</nav>
--->
-<br><br>
-<main>
-<table>
 
 <nav class = "navbar">
     <ul>
@@ -51,7 +24,41 @@
     </ul>
 </nav>
 
-</main>
+<div class="wrapper">
+     <div class="left">
+         <img src="images/user.png" alt="user" width="165"; height="125px";>
+         <h4>John Smith</h4>
+     </div>
+     <div class="right">
+         <div class="info">
+             <h3>User Profile</h3>
+             <div class="infoData">
+                 <div class="data">
+                     <h4>Email</h4>
+                     <p>Test@Test.com</p>
+                 </div>
+                 <div class="data">
+                     <h4>Address</h4>
+                     <p>1234 Street Ave</p>
+                 </div>
+                 <div class="data">
+                     <h4>Family Size</h4>
+                     <p>3 members</p>
+                 </div>
+                 <div class="data">
+                     <h4>Diet Restrictions</h4>
+                     <p>Vegetarian</p>
+                 </div>
+                 <div class="data">
+                     <h4>Transportation Method</h4>
+                     <p>Walk or Bike</p>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+
 <script type="text/javascript">
    document.body.style.visibility='visible';
 </script>
