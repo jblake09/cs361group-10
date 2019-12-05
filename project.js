@@ -97,31 +97,32 @@ app.get('/list', function (req, res)
 		getProduceForDropDown(req, res, mysql, context, complete);
 		function complete() 
 		{
-			//callbackCount++;
-		//	if (callbackCount >= 2)
-			//{
+			callbackCount++;
+			if (callbackCount >= 1)
+			{
 				res.render('List.hbs', context);
-		//	}
+			}
 		}
 });
-//			res.write(JSON.stringify(error));
-			//console.log("err");
-	//		res.end();
-		//	}
-			//var data = [];
-//		for(i=0;i<results.length;i++){
-	//	data.push(results[i]);
-		//}
-		//res.end(JSON.stringify(results));
-			//var context = {};
-			//context=results.name.toString();
-			//console.log(data);
-//	res.render('List.hbs', data);
-  
- 
-	//})
-//	});
 
+app.post(['/list'], function(req, res, next){
+	
+	console.log("TESTING");
+	// console.log(req.body.selection);
+	console.log(req.body);
+
+
+	// var sql = "INSERT INTO LISTS (`userID`, `itemID`, `qty`) VALUE (?, ?, ?)"
+	// var inserts = [req.body.selection];
+	// mysql.pool.query(sql, inserts, function(err, result){
+	// if(err){
+	// 	next(err);
+	// 	return;
+	// }
+	// res.redirect('/');
+	// return;
+	// });
+})
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -207,12 +208,12 @@ app.get(['/profile'], function(req, res, next){
 	res.sendFile(path.join(__dirname+'/public/Profile.html'));
 });
 
-
-app.get(['/list'], function(req, res, next)
-{
+// This code is non-functional, likely delete
+// app.get(['/list'], function(req, res, next)
+// {
 	
-	res.render('List.handlebars');
-});
+// 	res.render('List.handlebars');
+// });
 
 app.get(['/loginerr'], function(req, res, next){
 	res.sendFile(path.join(__dirname+'/public/loginerr.html'));

@@ -24,21 +24,17 @@ DROP TABLE IF EXISTS `LISTS`;
 CREATE TABLE `LISTS` (
 	`lineID` int(11) NOT NULL AUTO_INCREMENT UNIQUE,
 	`userID` int(11)  NOT NULL,
-	`listItem` varchar(255) NOT NULL,
+	`itemID` int(11) NOT NULL, 
 	`qty` int NOT NULL,
-	`searchURL` varchar(255) NOT NULL,
 	PRIMARY KEY (`lineID`),
-	FOREIGN KEY (`userID`) REFERENCES `USERS`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (`userID`) REFERENCES `USERS`(`id`),
+	FOREIGN KEY (`itemID`) REFERENCES `GROCERY`(`ID`)
 	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- Create sample data for LISTS
 
 INSERT INTO `LISTS` VALUES
-	(NULL, '1000', 'Peaches', '2', 'www.peaches.com'),
-	(NULL, '1000', 'Salmon', '4', 'www.salmon.com'),
-	(NULL, '1001', 'Steak', '10', 'www.steak.com'),
-	(NULL, '1001', 'Coffee', '200', 'www.coffee.com');
-
-
-
-
+	(NULL, '1000', 1, '2'),
+	(NULL, '1000', 2, '4'),
+	(NULL, '1001', 3, '10'),
+	(NULL, '1001', 4, '200');
