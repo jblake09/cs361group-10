@@ -56,7 +56,7 @@ function getProduceForDropDown(req, res, mysql, context, complete) {
 
 function getProduceForList(req, res, mysql, context, complete) {
 		mysql = require('./dbcon.js');
-		var sql = 'SELECT LISTS.itemID, GROCERY.ID, GROCERY.name, GROCERY.grocerystore FROM LISTS LEFT JOIN GROCERY ON LISTS.itemID = GROCERY.ID';
+		var sql = 'SELECT LISTS.itemID, GROCERY.ID, GROCERY.name, GROCERY.grocerystore, GROCERY.price FROM LISTS LEFT JOIN GROCERY ON LISTS.itemID = GROCERY.ID';
 		mysql.pool.query(sql, function(error, results, fields) {
 			if (error) {
 				res.write(JSON.stringify(error));
@@ -80,6 +80,7 @@ app.get('/viewList', function (req, res)
 		var context = {};
 		//context.jsscripts = ["deletePlaylist.js"];
 		var mysql = req.app.get('mysql');
+
 //		getPlaylists(req, res, mysql, context, complete);
 		getProduceForList(req, res, mysql, context, complete);
 		function complete() 
@@ -91,6 +92,35 @@ app.get('/viewList', function (req, res)
 			}
 		}
 });
+
+
+function getSum(req, res, mysql, context, complete){
+  mysql = require('./dbcon.js');
+  var sql = 'SELECT SUM(GROCERY.price) FROM LISTS LEFT JOIN GROCERY ON LISTS.itemID = GROCERY.ID';
+
+  mysql.pool.query(sql, function(err, result, fields){
+   if (error) {
+		res.write(JSON.stringify(error));
+		res.end();
+	}
+    context.total = result;
+   // res.render('viewList.hbs', context);
+    complete();
+  });
+}
+
+
+app.get('/viewList', function (req, res) {
+	var context = {};
+	var mysql = req.app.get('mysql');
+	getSum(req, res, mysql, context, complete);
+	function complete() 
+	{
+		res.render('viewList.hbs', context);
+	}
+});
+
+
 /*
 function getUsersForDropDown(req, res, context, complete) {
 		var sql = 'SELECT name, id FROM GROCERY';
@@ -161,12 +191,11 @@ app.get('/list', function (req, res)
 		}
 });
 
+
 app.post(['/list'], function(req, res, next){
-	
 	console.log("TESTING");
 	// console.log(req.body.selection);
 	console.log(req.body);
-
 
 	var sql = "INSERT INTO LISTS (`userID`, `itemID`, `qty`) VALUE (?, ?, ?)"
 	var inserts = [1000, req.body.groceryOption, 1];
@@ -179,6 +208,7 @@ app.post(['/list'], function(req, res, next){
 	return;
 	});
 })
+
 
 function getData(res, mysql, context, complete) {
 	var sql = "SELECT * FROM USERS;"
