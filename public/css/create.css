@@ -103,13 +103,12 @@ input[type="submit"]:hover{
 
 .navbar {
     text-align: center;
-    background-color: #000000;
-    height: 75px;
-    padding-top: 20px;
+    background: transparent;
+    height: 30px;
+    padding-top: 15px;
     margin-left:auto;
-margin-right:auto;
+    margin-right:auto;
 }
-
 
 .field {
     display: inline-block;
