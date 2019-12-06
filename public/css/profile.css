@@ -21,6 +21,12 @@ body{
     font-weight: bold;
 }
 
+#aLink {
+    color: #EDBB99;
+    text-decoration: none;
+}
+
+
 .wrapper{
     position: absolute;
     top: 50%;
